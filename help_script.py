@@ -14,3 +14,7 @@ for artist in artist_names:
 new_df = pd.DataFrame({'Names':new_artist_names})
 
 print(new_df['Names'].value_counts())
+
+genres = list(df['Genres'])
+
+print(genres)

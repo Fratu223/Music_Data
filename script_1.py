@@ -51,3 +51,25 @@ if uploaded_file is not None:
     # Plot the artist name by value counts
     st.write('Value counts for artist name:')
     st.bar_chart(artist_value_counts)
+
+    # Retrive list of genres
+    genres = list(df['Genres'].dropna())
+
+    # Empty list for splitting multiple genres 
+    new_genres = []
+
+    # Separate multiple genres
+    for genre in genres:
+        genres_list = genre.split(',')
+        for i in range(0, len(genres_list)):
+            new_genres.append(genres_list[i])
+
+    # New DataFrame with multiple genres separated
+    new_df_2 = pd.DataFrame({'Genres':new_genres})
+
+    # Calculate the value couts for the genres
+    genres_value_counts = new_df_2['Genres'].value_counts()
+
+    # Plot the genres by value counts
+    st.write('Value counts for genres:')
+    st.bar_chart(genres_value_counts)
