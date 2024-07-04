@@ -30,8 +30,23 @@ if uploaded_file is not None:
     st.write("Average popularity of the playlist")
     st.write(average_popularity)
 
+    # Retrive list of artist names
+    artist_names = list(df['Artist Name(s)'])
+
+    # Empty list for main and featuring artists
+    new_artist_names = []
+
+    # Separate main and featuring artists
+    for artist in artist_names:
+        new_artist_list = artist.split(',')
+        for i in range(0, len(new_artist_list)):
+            new_artist_names.append(new_artist_list[i])
+
+    # New DataFrame with main and featuring artists separated
+    new_df = pd.DataFrame({'Names':new_artist_names})
+
     # Calculate the value couts for the artist name
-    artist_value_counts = df['Artist Name(s)'].value_counts()
+    artist_value_counts = new_df['Names'].value_counts()
 
     # Plot the artist name by value counts
     st.write('Value counts for artist name:')
