@@ -5,6 +5,9 @@ import numpy as np
 # Title of the app
 st.title('Spotify Playlist Data Analysis')
 
+# CSV file info
+st.write("For requiring the CSV file of the playlist, please visit this site https://exportify.net/")
+
 # File uploader
 uploaded_file = st.file_uploader("Choose a CSV playlist file", type="csv")
 
@@ -13,8 +16,8 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     
     # Display the dataframe
-    st.write("Here's the data from the uploaded CSV playlist file:")
-    st.write(df)
+    st.write("Here's the tracks from the playlist:")
+    st.write(df[['Track Name', 'Album Name', 'Artist Name(s)']])
 
     # Calculate the average tempo of the playlist
     average_tempo = df.loc[:,'Tempo'].mean()
@@ -29,6 +32,27 @@ if uploaded_file is not None:
     # Display the average popularity of the playlist
     st.write("Average popularity of the playlist")
     st.write(average_popularity)
+
+    # Calculate the average duration in ms of songs in the playlist
+    average_duration = df.loc[:,'Duration (ms)'].mean()
+
+    # Display the average duration in ms of songs the playlist
+    st.write("Average duration (ms) of songs in the playlist")
+    st.write(average_duration)
+
+    # Calculate the average danceability of the playlist
+    average_danceability = df.loc[:,'Danceability'].mean()
+
+    # Display the average danceability of the playlist
+    st.write("Average danceability of the playlist")
+    st.write(average_danceability)
+
+    # Calculate the average energy of the playlist
+    average_energy = df.loc[:,'Energy'].mean()
+
+    # Display the average energy of the playlist
+    st.write("Average energy of the playlist")
+    st.write(average_energy)
 
     # Retrive list of artist names
     artist_names = list(df['Artist Name(s)'])
